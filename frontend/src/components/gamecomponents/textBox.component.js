@@ -25,7 +25,8 @@ export default class TextBox extends Component {
                 <Form>
                     <Form.Group controlId="formBasicPassword">
                         <Form.Label>Code here:</Form.Label>
-                        <Form.Control type="text" placeholder="" onChange={this.codeChange} />
+                        <Form.Control type="text" style={{backgroundColor: "#000000", color: "#4AF626"}} 
+                        placeholder="" onChange={this.codeChange} />
                     </Form.Group>
                 </Form>
             </div>
