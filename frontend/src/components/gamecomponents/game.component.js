@@ -14,11 +14,12 @@ export default class GamePage extends Component {
             textList:[],  //contains the list of spliced texts
             position:0,  //position in the list
             currentTypeText:"",
-            totalNumberOfWords:25,
-            totalNumberOfCompletedWords:5,
+            totalNumberOfWords:0,
+            totalNumberOfCompletedWords:0,
             completedLineNumber:1,
             completedWordsInCurrentLine:3
         };
+        this.handleChildStateChange = this.handleChildStateChange.bind(this);
     }
 
     componentDidMount()
@@ -34,11 +35,18 @@ export default class GamePage extends Component {
         //find the number of words in the text
         let tempList = this.state.fullText.split(" ");
         this.setState((state, props) => ({
-            textList:tempList,
+            totalNumberOfWords:tempList.length
         })); 
         //generate the progress line
     }
 
+    handleChildStateChange=(childState)=>
+    {
+        this.setState((state, props)=>({
+            completedWordsInCurrentLine:childState.words,
+            completedLineNumber:childState.line,
+        }));
+    };
 
     render() {
         return (
@@ -46,8 +54,14 @@ export default class GamePage extends Component {
                 <CodeBox text={this.state.fullText}
                     completedLine={this.state.completedLineNumber}
                     completedWords={this.state.completedWordsInCurrentLine}/>
-                <TextBox/>
-                <ProgressLine total={this.state.totalNumberOfWords} number={this.state.totalNumberOfCompletedWords}/>
+
+                <TextBox text={this.state.fullText}
+                    completedLine={this.state.completedLineNumber}
+                    completedWords={this.state.completedWordsInCurrentLine}
+                    handleChildStateChange={this.state.handleChildStateChange}/>
+
+                <ProgressLine total={this.state.totalNumberOfWords}
+                number={this.state.totalNumberOfCompletedWords}/>
             </div>
         )
     }

@@ -33,7 +33,7 @@ export default class CodeBox extends Component {
     
         // Return null to indicate no change to state.
         return null;
-      }
+    }
     
 
     render() {
@@ -44,25 +44,43 @@ export default class CodeBox extends Component {
             listItems = listItems+this.state.textList[i]+"\n";
         }
 
-        // if(this.state.line[this.state.line] == undefined)
-        //     let tempList = this.state.textList[this.state.line].split(" ");
-        // console.log(tempList);
-        // for(let i=0; i<this.state.word; i++)
-        // {
-        //     listItems = listItems+tempList[i]+" ";
-        // }
+        var mistakeCode = "";
+        var remainingCode = "";
+        if(this.state.textList[this.state.line] !== undefined)
+        {
+            let tempList = this.state.textList[this.state.line].split(" ");
+            console.log(tempList);
+            for(let i=0; i<this.state.word; i++)
+            {
+                listItems = listItems+tempList[i]+" ";
+            }
+            
+            mistakeCode=tempList[this.state.word]+" ";
 
+            for(let i=this.state.word+1; i<tempList.length; i++)
+            {
+                remainingCode = remainingCode+tempList[i]+" ";
+            }
+
+            remainingCode=remainingCode+"\n";
+
+            for(let i=this.state.line; i<this.state.textList; i++)
+            {
+                remainingCode = remainingCode+this.state.textList[i]+"\n";
+            }
+
+        }
         const CompletedCodeText = <code>{listItems}</code>
-        //wrong line/words
-        const mistakeCode = ""
-        //remaining line/words
-        const remainingCode = ""
 
         return (
             <div>
-                <div><pre className="completedText text-success"><code>{CompletedCodeText}</code></pre></div>
-                <div><pre className="mistypedText text-warning">{mistakeCode}</pre></div>
-                <div><pre className="remainingText">{remainingCode}</pre></div>
+                <div>
+                    <pre>
+                        <code className="completedText text-success">{CompletedCodeText}</code>
+                        <code className="mistypedText text-danger">{mistakeCode}</code>
+                        <code className="remainingText">{remainingCode}</code>
+                    </pre>
+                </div>
             </div>
         )
     }
