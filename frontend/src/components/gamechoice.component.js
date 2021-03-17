@@ -5,7 +5,7 @@ import CodeBox from './gamecomponents/codeBox.component'
 export default function GameChoice() {
     return (
         <div>
-            <p>hello world</p>
+            <p>Start Typing</p>
             <Game/>
         </div>
     )

@@ -55,6 +55,8 @@ export default class CodeBox extends Component {
                 listItems = listItems+tempList[i]+" ";
             }
             
+            console.log("word "+this.state.word);
+
             mistakeCode=tempList[this.state.word]+" ";
 
             for(let i=this.state.word+1; i<tempList.length; i++)
@@ -64,7 +66,7 @@ export default class CodeBox extends Component {
 
             remainingCode=remainingCode+"\n";
 
-            for(let i=this.state.line; i<this.state.textList; i++)
+            for(let i=this.state.line+1; i<this.state.textList.length; i++)
             {
                 remainingCode = remainingCode+this.state.textList[i]+"\n";
             }
