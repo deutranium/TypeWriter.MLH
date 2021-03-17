@@ -16,7 +16,7 @@ export default class GamePage extends Component {
             position:0,  //position in the list
             currentTypeText:"",
             totalNumberOfWords:25,
-            totalNumberOfCompletedWords:5,
+            totalNumberOfCompletedWords:0,
             completedLineNumber:0,
             completedWordsInCurrentLine:0,
             startedTyping:false,
@@ -25,48 +25,77 @@ export default class GamePage extends Component {
         };
         this.handleChildStateChange = this.handleChildStateChange.bind(this);
         this.onTimeComplete = this.onTimeComplete.bind(this);
+        this.onTimeStart = this.onTimeStart.bind(this);
     }
 
-    componentDidMount()
+    async componentDidMount()
     {
         // client<->server comm
 
 
         //get the text
-        this.setState((state, props) => ({
+        await this.setState((state, props) => ({
             fullText: ['if (helloWorld) { return true; } else {return false;}', 'for(let i =0; i<list.length; i++){ }'],
         }));
 
         //find the number of words in the text
-        let tempList = this.state.fullText.split(" ");
-        this.setState((state, props) => ({
-            totalNumberOfWords:tempList.length
+        let tempCount = 0;
+        for (let i = 0; i < this.state.fullText.length; i++) {
+            let tempList = this.state.fullText[i].split(" ");
+            tempCount = tempCount + tempList.length;
+          }
+        await this.setState((state, props) => ({
+            totalNumberOfWords:tempCount
         })); 
+
         //generate the progress line
     }
 
-    handleChildStateChange=(childState)=>
+    handleChildStateChange= async (childState)=>
     {
-        this.setState((state, props)=>({
+        let tempCount=childState.word;
+
+        if(childState.line!=0)
+        {
+            tempCount = 0;
+            for(let i=0; i<childState.line; i++)
+            {
+                let tempList = this.state.fullText[i].split(" ");
+                tempCount = tempCount + tempList.length;
+            }
+            tempCount = tempCount + childState.word;
+        }
+        
+
+        await this.setState((state, props)=>({
+            totalNumberOfCompletedWords: tempCount,
             completedWordsInCurrentLine:childState.word,
             completedLineNumber:childState.line,
         }));
-        console.log("below are the line numbers");
-        console.log(this.state.completedLineNumber);
-        console.log(this.state.fullText.length);
 
-        if(this.state.completedLineNumber!=0 && this.state.completedLineNumber === (this.state.fullText.length-1))
+        if(this.state.completedLineNumber!==0 && this.state.completedLineNumber === (this.state.fullText.length))
         {
-            this.setState((state, props)=>({
+            await this.setState((state, props)=>({
                 completedTyping:true
             }));
         }
     };
 
-    onTimeComplete=(timerValue)=>
+    onTimeComplete=async (timerValue)=>
     {
-        this.setState((state, props) => ({
+        await this.setState((state, props) => ({
             time:timerValue
+        }));
+        console.log("This is timer value");
+        console.log(this.state.time);
+    };
+
+    onTimeStart = async (start, complete)=>
+    {
+        console.log("start time called");
+        await this.setState((state, props)=>({
+            startedTyping:start,
+            completedTyping:complete
         }));
     };
 
@@ -84,12 +113,13 @@ export default class GamePage extends Component {
                 <TextBox text={this.state.fullText}
                     start={this.state.startedTyping} 
                     complete={this.state.completedTyping}
-                    handleChildStateChange={this.handleChildStateChange}/>
+                    handleChildStateChange={this.handleChildStateChange}
+                    startTime={this.onTimeStart}/>
 
                 <ProgressLine total={this.state.totalNumberOfWords}
                 number={this.state.totalNumberOfCompletedWords}/>
 
-                <ResultModal resultTime={this.state.completedTyping}/>
+                <ResultModal resultTime={this.state.completedTyping} time={this.state.time}/>
             </div>
         )
     }

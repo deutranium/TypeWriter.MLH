@@ -49,13 +49,11 @@ export default class CodeBox extends Component {
         if(this.state.textList[this.state.line] !== undefined)
         {
             let tempList = this.state.textList[this.state.line].split(" ");
-            console.log(tempList);
+            
             for(let i=0; i<this.state.word; i++)
             {
                 listItems = listItems+tempList[i]+" ";
             }
-            
-            console.log("word "+this.state.word);
 
             mistakeCode=tempList[this.state.word]+" ";
 

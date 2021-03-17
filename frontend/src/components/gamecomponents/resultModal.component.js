@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import {render} from 'react-dom';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
@@ -20,11 +20,11 @@ function MyVerticallyCenteredModal(props) {
         <Modal.Body>
           <h6>User Time:</h6>
           <p>
-            Display User Time here
+            {props.time}
           </p>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={props.onHide}>Close</Button>
+          <Button onClick={()=>{window.location.href="/game"}}>Start Again</Button>
         </Modal.Footer>
       </Modal>
     );
@@ -32,16 +32,17 @@ function MyVerticallyCenteredModal(props) {
   
   function App(props) {
     const [modalShow, setModalShow] = React.useState(props.resultTime);
+    useEffect(() => {
+      setModalShow(props.resultTime);
+    }, [props.resultTime])
   
     return (
       <>
-        <Button variant="primary" onClick={() => setModalShow(true)}>
-          Launch vertically centered modal
-        </Button>
   
         <MyVerticallyCenteredModal
           show={modalShow}
-          onHide={() => setModalShow(false)}
+          time={props.time}
+          onHide={()=>{window.location.href="/game"}}
         />
       </>
     );

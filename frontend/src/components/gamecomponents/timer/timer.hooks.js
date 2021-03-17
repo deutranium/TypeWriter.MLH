@@ -33,8 +33,8 @@ const useTimer = (initialState = 0) => {
     setTimer(0);
   }
 
-  const getTime = () => {
-      return timer;
+  const getTime = (onTimeComplete) => {
+      onTimeComplete(timer)
   }
 
   return { timer, isActive, isPaused, handleStart, handlePause, handleResume, handleReset, getTime };

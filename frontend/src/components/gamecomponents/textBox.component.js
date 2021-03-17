@@ -10,7 +10,8 @@ export default class TextBox extends Component {
             word: 0,
             line: 0,
             currentWord: "",  //current word that is being typed
-            fieldValue: ""
+            fieldValue: "",
+            timeStart:false
         }
 
         this.codeChange = this.codeChange.bind(this);
@@ -18,9 +19,9 @@ export default class TextBox extends Component {
     }
 
 
-    resetForm()
+    async resetForm()
     {
-        this.setState((state, props) => ({
+        await this.setState((state, props) => ({
             fieldValue:""
         }));
     }
@@ -28,26 +29,21 @@ export default class TextBox extends Component {
     // text={this.state.fullText}
     // completedLine={this.state.completedLineNumber}
     // completedWords={this.state.completedWordsInCurrentLine}
-    codeChange(e)
+    async codeChange(e)
     {
+        if(this.state.timeStart===false)
+        {
+            this.props.startTime(true, false);
+        }
         // for each line suggest a way to compare each word
         let typedWords = e.target.value.split(" ");
-        console.log(typedWords);
-        console.log(this.state.textList[this.state.line]);
         let neededWords = this.state.textList[this.state.line].split(" ");
         let wordCount = 0;
-
-        console.log("Here are the typed words");
-        console.log(typedWords.length);
-        console.log(typedWords[typedWords.length-1]);
-        console.log(neededWords[typedWords.length-1]);
-        console.log(typedWords[typedWords.length-1]===neededWords[typedWords.length-1])
 
         // comparing words and count
         for(let i=0; i<typedWords.length; i++){
             if(typedWords[i]===neededWords[i])
             {
-                console.log("here");
                 wordCount = wordCount+1;
             }
             else
@@ -59,8 +55,8 @@ export default class TextBox extends Component {
         // check line
         if(neededWords.length === wordCount)
         {
-            this.setState((state, props) => ({
-                line:this.state.line+1,
+            await this.setState((state, props) => ({
+                line:state.line+1,
                 word: 0
             })); 
 
@@ -68,15 +64,16 @@ export default class TextBox extends Component {
         }
         else
         {
-            this.setState((state, props) => ({
+            await this.setState((state, props) => ({
                 fieldValue:e.target.value,
                 word: wordCount
             })); 
         }
 
 
-        this.setState((state, props) => ({
+        await this.setState((state, props) => ({
             currentWord:e.target.value,
+            timeStart:true
         })); 
 
         this.props.handleChildStateChange(this.state);

@@ -1,21 +1,28 @@
 import { getDefaultNormalizer } from '@testing-library/dom';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import "./timer.css";
 import useTimer from './timer.hooks';
 import { formatTime } from './utils';
 
-const Timer = (start=false, complete=false, onTimeComplete) => {
+const Timer = (props) => {
   const { timer, isActive, isPaused, handleStart, handlePause, handleResume, handleReset, getTime } = useTimer(0);
+  const [start, setStart] = useState(false)
+  const [complete, setComplete] = useState(false)
 
-  // if(start && !complete)
-  // {
-  //     handleStart();
-  // }
-  // if(start && complete)
-  // {
-  //     handlePause();
-  //     //onTimeComplete(getTime());
-  // }
+  useEffect(() => {
+    setStart(props.start)
+    setComplete(props.complete)
+  }, [props.start, props.complete])
+
+  useEffect(() => {
+    handleStart();
+  }, [start]);
+
+  useEffect(() => {
+    handlePause();
+    getTime(props.onTimeComplete);
+  }, [complete]);
+
   return (
     <div className="app">
       {/* <h3>React Stopwatch {element}</h3> */}
