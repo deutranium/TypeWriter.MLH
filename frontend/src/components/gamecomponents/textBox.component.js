@@ -95,7 +95,7 @@ export default class TextBox extends Component {
             <div className="container">
                 <Form>
                     <Form.Group controlId="formBasicPassword">
-                        <Form.Label>Code here:</Form.Label>
+                        <Form.Label>Code here <em>(timer starts once you start typing)</em>:</Form.Label>
                         <Form.Control name="inputField" type="text"
                         value={this.state.fieldValue}
                         style={{backgroundColor: "#000000", color: "#4AF626"}} 
