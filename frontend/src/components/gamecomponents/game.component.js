@@ -7,12 +7,12 @@ import ResultModal from './resultModal.component';
 import axios from 'axios';
 
 export default class GamePage extends Component {
-    
+
     constructor(props)
     {
         super(props);
         this.state ={
-            fullText:"",  //contains the code snippet
+            fullText:["Loading..."],  //contains the code snippet
             textList:[],  //contains the list of spliced texts
             position:0,  //position in the list
             currentTypeText:"",
@@ -31,25 +31,24 @@ export default class GamePage extends Component {
 
     async componentDidMount()
     {
-        // client<->server comm
-        try
-        {
-            const response = await axios.get('http://localhost:8080/get_snippet');
+        // client<->server comm0
 
-            //no need to implement callback
-            await this.setState(()=>({
-                fullText: response.data 
-            }));
-        }
-        catch(error)
-        {
-            console.log(error);
-            await this.setState((state, props) => ({
-                fullText: ['if (helloWorld) { return true; } else {return false;}', 'for(let i =0; i<list.length; i++){ }'],
-            }));
-        }
-
-        //get the text
+        // get text
+        fetch("http://localhost:8000/get_snippet")
+        .then(res => res.json())
+        .then(
+            (result) => {
+                this.setState({
+                    fullText: result.snippet
+                });
+            },
+            (error) => {
+                console.log(error)
+                this.setState({
+                    fullText: ["ERROR"],
+                });
+            }
+        )
 
         //find the number of words in the text
         let tempCount = 0;
