@@ -6,12 +6,12 @@ import Timer from './timer/timer.component';
 import ResultModal from './resultModal.component';
 
 export default class GamePage extends Component {
-    
+
     constructor(props)
     {
         super(props);
         this.state ={
-            fullText:"",  //contains the code snippet
+            fullText:["Loading..."],  //contains the code snippet
             textList:[],  //contains the list of spliced texts
             position:0,  //position in the list
             currentTypeText:"",
@@ -30,13 +30,24 @@ export default class GamePage extends Component {
 
     async componentDidMount()
     {
-        // client<->server comm
+        // client<->server comm0
 
-
-        //get the text
-        await this.setState((state, props) => ({
-            fullText: ['if (helloWorld) { return true; } else {return false;}', 'for(let i =0; i<list.length; i++){ }'],
-        }));
+        // get text
+        fetch("http://localhost:8000/get_snippet")
+        .then(res => res.json())
+        .then(
+            (result) => {
+                this.setState({
+                    fullText: result.snippet
+                });
+            },
+            (error) => {
+                console.log(error)
+                this.setState({
+                    fullText: ["ERROR"],
+                });
+            }
+        )
 
         //find the number of words in the text
         let tempCount = 0;
