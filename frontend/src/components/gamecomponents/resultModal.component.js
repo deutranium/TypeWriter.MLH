@@ -20,7 +20,11 @@ function MyVerticallyCenteredModal(props) {
         <Modal.Body>
           <h6>User Time:</h6>
           <p>
-            {props.time}
+            <strong>{props.total}</strong> <em>js programming words in</em> <strong>{props.time}</strong> <em>seconds</em>
+          </p>
+          <h6>Average Time:</h6>
+          <p>
+          <strong>{(props.total / props.time)*60}</strong> <em>js words per minute</em>
           </p>
         </Modal.Body>
         <Modal.Footer>
@@ -41,6 +45,7 @@ function MyVerticallyCenteredModal(props) {
   
         <MyVerticallyCenteredModal
           show={modalShow}
+          total={props.total}
           time={props.time}
           onHide={()=>{window.location.href="/game"}}
         />

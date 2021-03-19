@@ -119,7 +119,9 @@ export default class GamePage extends Component {
                 <ProgressLine total={this.state.totalNumberOfWords}
                 number={this.state.totalNumberOfCompletedWords}/>
 
-                <ResultModal resultTime={this.state.completedTyping} time={this.state.time}/>
+                <ResultModal total={this.state.totalNumberOfWords}
+                resultTime={this.state.completedTyping}
+                time={this.state.time}/>
             </div>
         )
     }

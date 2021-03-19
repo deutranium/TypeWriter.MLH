@@ -92,7 +92,7 @@ export default class TextBox extends Component {
 
     render() {
         return (
-            <div className="container">
+            <div className="container" >
                 <Form>
                     <Form.Group controlId="formBasicPassword">
                         <Form.Label>Code here <em>(timer starts once you start typing)</em>:</Form.Label>
