@@ -4,6 +4,7 @@ import TextBox from './textBox.component';
 import ProgressLine from './progessline.component';
 import Timer from './timer/timer.component';
 import ResultModal from './resultModal.component';
+import axios from 'axios';
 
 export default class GamePage extends Component {
     
@@ -31,12 +32,24 @@ export default class GamePage extends Component {
     async componentDidMount()
     {
         // client<->server comm
+        try
+        {
+            const response = await axios.get('http://localhost:8080/get_snippet');
 
+            //no need to implement callback
+            await this.setState(()=>({
+                fullText: response.data 
+            }));
+        }
+        catch(error)
+        {
+            console.log(error);
+            await this.setState((state, props) => ({
+                fullText: ['if (helloWorld) { return true; } else {return false;}', 'for(let i =0; i<list.length; i++){ }'],
+            }));
+        }
 
         //get the text
-        await this.setState((state, props) => ({
-            fullText: ['if (helloWorld) { return true; } else {return false;}', 'for(let i =0; i<list.length; i++){ }'],
-        }));
 
         //find the number of words in the text
         let tempCount = 0;
