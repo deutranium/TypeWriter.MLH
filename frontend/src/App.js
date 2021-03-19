@@ -2,8 +2,9 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import Navbar from './components/navigation.component'
-// import HomePage from './components/homepage.component'
+import HomePage from './components/homepage.component'
 import GameChoice from './components/gamechoice.component'
+import LoginPage from './components/login.component'
 
 function App() {
   return (
@@ -11,8 +12,9 @@ function App() {
       <Router>
         <Navbar/>
         <Switch>
-          {/* <Route path="/" component={HomePage}/> */}
-          <Route path="/" component={GameChoice}/>
+          <Route path="/" exact component={HomePage}/>
+          <Route path="/game" component={GameChoice}/>
+          <Route path="/login" component={LoginPage}/>
         </Switch>
       </Router>
     </div>

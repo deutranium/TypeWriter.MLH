@@ -73,8 +73,8 @@ export default class CodeBox extends Component {
         const CompletedCodeText = <code>{listItems}</code>
 
         return (
-            <div>
-                <div>
+            <div className="container">
+                <div className="container" style={{textAlign:'left'}}>
                     <pre>
                         <code className="completedText text-success">{CompletedCodeText}</code>
                         <code className="mistypedText text-danger">{mistakeCode}</code>

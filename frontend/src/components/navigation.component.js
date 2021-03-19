@@ -13,7 +13,7 @@ export default function Navigation() {
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="mr-auto">
-                            <Nav.Link href="/instruction">Instruction</Nav.Link>
+                            <Nav.Link href="/game">Start Typing</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
 

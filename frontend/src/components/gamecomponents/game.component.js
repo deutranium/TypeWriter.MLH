@@ -4,6 +4,7 @@ import TextBox from './textBox.component';
 import ProgressLine from './progessline.component';
 import Timer from './timer/timer.component';
 import ResultModal from './resultModal.component';
+import axios from 'axios';
 
 export default class GamePage extends Component {
 
@@ -130,7 +131,9 @@ export default class GamePage extends Component {
                 <ProgressLine total={this.state.totalNumberOfWords}
                 number={this.state.totalNumberOfCompletedWords}/>
 
-                <ResultModal resultTime={this.state.completedTyping} time={this.state.time}/>
+                <ResultModal total={this.state.totalNumberOfWords}
+                resultTime={this.state.completedTyping}
+                time={this.state.time}/>
             </div>
         )
     }
