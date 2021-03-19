@@ -1,12 +1,38 @@
-# Code Typewriter
+<p align="center"><img width="200" src="https://i.imgur.com/TE6LhaR.png"></p>
+<h1 align="center">Code Typewriter</h1>
+<p align="center">
+A web-based typing game to help users improve their speed when programming
+</p>
+
+Main App            |  Post Form
+:-------------------------:|:-------------------------:
+![](https://i.imgur.com/gppD4H0.png)  |  ![](https://i.imgur.com/F83LRZd.png)
+
+
+## Description
+Code Typewriter is a game heavily inspired by TypeWriter, in which the user is prompted with a code snippet, and then timed by how fast they type the code snippet without error. Often times when playing games like TypeRacer, the Word Per Minute doesn't accurately show how fast you would type when coding, because of weird characters one deals with when coding. This is why Code TypeWriter was made. Built in React, FastAPI, and FaunaDB, this game is simple to play and great for working on your typing speed.
+
+## App Features
+* Frontend gameplay built with __React__ and JavaScript
+* Backend REST API developed with __Python__ and __FastAPI__
+* Data held and persisted in a FaunaDB document database
+
+## Installation
+#### Requirements
+* Node.js, Python3
+
+#### Setup
+* Clone this repository
+## Frontend
+* `cd` into `/frontend`
+* run `npm install` to grab necessary dependencies
+* run `npm start` to boot dev server
+* dev server should be running on port `3000`
 
 ## Backend
-### How to run
-- Install the required packages using `pip3 install -r requirements.txt` after navigating to `/backend`
-- Start the server using `python3 main.py`
-- View the server at `http://0.0.0.0:8000`
+* cd into backend
+* install dependence in `requirements.txt`
+* run `python main.py`
+* dev server should be running on port `8000`
 
-### Contributing
-- Format the code by using [pep 8](https://www.python.org/dev/peps/pep-0008/) guidelines. You may look into [black](https://pypi.org/project/black/) for the same
-- If you install any new packages, ensure that they have been added to `backend/requirements.txt`. You may use [pipreqs](https://pypi.org/project/pipreqs/) for this
-
+Application Should be running
