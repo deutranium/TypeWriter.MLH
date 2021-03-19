@@ -4,6 +4,7 @@ import './App.css';
 import Navbar from './components/navigation.component'
 import HomePage from './components/homepage.component'
 import GameChoice from './components/gamechoice.component'
+import LoginPage from './components/login.component'
 
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
         <Switch>
           <Route path="/" exact component={HomePage}/>
           <Route path="/game" component={GameChoice}/>
-          <Route path="/login" component={GameChoice}/>
+          <Route path="/login" component={LoginPage}/>
         </Switch>
       </Router>
     </div>
