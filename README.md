@@ -35,6 +35,13 @@ TypeWriter fixes this problem that we face in TypeRacer- you type code, not Engl
 * React was also a new framework for some of the team members
 * Time management and collaboration across timezones 
 
+## What's next for Type-Writer
+* Multiplayer Functionality
+* Scoreboard
+* Multiple Language Support
+* Login/Auth
+* Invite Friends
+
 ## Installation
 #### Requirements
 * Node.js, Python3
