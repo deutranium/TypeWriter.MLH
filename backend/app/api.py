@@ -5,8 +5,10 @@ from faunadb.objects import Ref
 from faunadb.client import FaunaClient
 import random
 
+from secrets import SECRET
 
-client = FaunaClient(secret="fnAEEib94TACACtQl8owfZHVe62sY79lmGMZdumu")
+
+client = FaunaClient(secret=SECRET)
 app = FastAPI()
 
 origins = [
