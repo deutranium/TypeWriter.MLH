@@ -4,11 +4,11 @@ from faunadb import query as q
 from faunadb.objects import Ref
 from faunadb.client import FaunaClient
 import random
+import sys, os.path
+from . import config
 
-from secrets import SECRET
 
-
-client = FaunaClient(secret=SECRET)
+client = FaunaClient(secret=config.api_key)
 app = FastAPI()
 
 origins = [
