@@ -38,8 +38,18 @@ export default class GamePage extends Component {
         .then(res => res.json())
         .then(
             (result) => {
+                const getNumWords = () => {
+                    let numWords = 0;
+                    result.snippet.forEach((current) => {
+                        let num = current.split(' ');
+                        numWords += num.length;
+                    })
+                    return numWords;
+                }
+                console.log(getNumWords())
                 this.setState({
-                    fullText: result.snippet
+                    fullText: result.snippet,
+                    totalNumberOfWords: getNumWords()
                 });
             },
             (error) => {
@@ -49,7 +59,6 @@ export default class GamePage extends Component {
                 });
             }
         )
-
         //find the number of words in the text
         let tempCount = 0;
         for (let i = 0; i < this.state.fullText.length; i++) {
@@ -62,6 +71,7 @@ export default class GamePage extends Component {
 
         //generate the progress line
     }
+    
 
     handleChildStateChange= async (childState)=>
     {
